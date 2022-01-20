@@ -1,0 +1,28 @@
+version: "3.5"
+services:
+  lumen-task-scheduling:
+    image: domenicogaeni/php:8.0-dev
+    container_name: lumen-task-scheduling
+    user: "www-data:www-data"
+    volumes:
+      - .:/var/www/html:cached
+    ports:
+      - ${PHP_HOST_PORT}:80
+    command: bash -c "composer install &&
+      apache2-foreground"
+    networks:
+      backend:
+        aliases:
+          - lumen-task-scheduling
+    environment:
+      - XDEBUG_ENABLED= 1
+      - XDEBUG_REMOTE_AUTOSTART= 1
+      - XDEBUG_MAXNESTING_LEVEL= 1000
+      - XDEBUG_REMOTE_CONNECT_BACK= 1
+      - XDEBUG_REMOTE_HOST= host.docker.internal
+      - PHP_IDE_CONFIG= serverName=localhost
+      - XDEBUG_MODE=debug
+
+networks:
+  backend:
+    name: network
