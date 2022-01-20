@@ -14,14 +14,6 @@ services:
       backend:
         aliases:
           - lumen-task-scheduling
-    environment:
-      - XDEBUG_ENABLED= 1
-      - XDEBUG_REMOTE_AUTOSTART= 1
-      - XDEBUG_MAXNESTING_LEVEL= 1000
-      - XDEBUG_REMOTE_CONNECT_BACK= 1
-      - XDEBUG_REMOTE_HOST= host.docker.internal
-      - PHP_IDE_CONFIG= serverName=localhost
-      - XDEBUG_MODE=debug
 
 networks:
   backend:
